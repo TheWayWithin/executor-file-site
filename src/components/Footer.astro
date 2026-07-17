@@ -1,0 +1,47 @@
+---
+import { REPO_URL } from '../config';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href={REPO_URL}>GitHub</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/why-trust-this">Security</a></li>
+        <li><a href="/money">How this site makes money</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+    <p class="fine">
+      Executor File is free, open source and MIT licensed. It is practical tooling,
+      not legal advice; the will decides.
+    </p>
+    <p class="fine">
+      Someone has died and you have the printed page?{' '}
+      <a href="/recover">Open the Executor File</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    margin-top: var(--space-7);
+    padding-block: var(--space-5);
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding: 0;
+    margin: 0 0 var(--space-3);
+  }
+  li { margin: 0; }
+  a { color: var(--ink-soft); }
+  a:hover { color: var(--accent-strong); }
+  .fine { margin-bottom: var(--space-2); }
+</style>

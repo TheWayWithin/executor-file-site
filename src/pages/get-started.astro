@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import Mirrored from '../components/Mirrored.astro';
+import * as Quickstart from '../mirrored/quickstart.md';
+import { DOWNLOAD_ENABLED, RELEASE_TAG, RELEASE_URL, RELEASE_TARBALL_URL, REPO_URL } from '../config';
+---
+<Base
+  title="Get started"
+  description="Set up your Executor File: about an hour at the computer, one command at a time. The result is an encrypted register and a printed page your executor can follow forever."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Get started</h1>
+      <p class="lede">
+        This takes about an hour at the computer, one command at a time, in the
+        Terminal. If you can copy and paste, you can do this. The result is an
+        encrypted file and a printed page your executor can follow forever.
+      </p>
+      <p>
+        That is the honest shape of it: there is no app, and the Terminal is the
+        cost of a tool with nothing behind it that can shut down. Every step
+        below tells you what it does before you run it, and nothing is timed.
+        When you're ready.
+      </p>
+    </section>
+
+    <section>
+      <h2>What you need first</h2>
+      <p>
+        Two small, standard tools: <code>age</code> (encryption) and{' '}
+        <code>ssss</code> (secret sharing). Both are free, open source and
+        packaged everywhere.
+      </p>
+      <ul>
+        <li><strong>Mac:</strong> <code>brew install age ssss</code> (if <code>brew</code> is not found, install it first from <a href="https://brew.sh">brew.sh</a>)</li>
+        <li><strong>Ubuntu or Debian Linux:</strong> <code>sudo apt install age ssss</code></li>
+        <li><strong>Windows:</strong> the register is created on a Mac or Linux machine; recovery on Windows has <a href="/recover/windows">its own printed sheet</a>.</li>
+      </ul>
+      <p>
+        Before anything else, the pre-flight check <code>scripts/doctor.sh</code>
+        confirms the tools are present and warns about hazards such as synced
+        folders. It changes nothing; it only looks.
+      </p>
+    </section>
+
+    <section id="download">
+      <h2>Download</h2>
+      {DOWNLOAD_ENABLED ? (
+        <>
+          <p>
+            Download the tagged release as a plain tarball. No GitHub account is
+            needed, and nothing about the download is tracked by us.
+          </p>
+          <p>
+            <a class="btn btn-primary" href={RELEASE_TARBALL_URL}>Download Executor File {RELEASE_TAG}</a>
+          </p>
+          <p>
+            The SHA-256 checksum is published beside the release on the{' '}
+            <a href={RELEASE_URL}>release page</a>. Verify it with{' '}
+            <code>shasum -a 256</code> on the downloaded file.
+          </p>
+        </>
+      ) : (
+        <p class="panel">
+          The download link goes live with the {RELEASE_TAG} release, together
+          with its SHA-256 checksum. Until then the current code is readable in
+          full <a href={REPO_URL}>on GitHub</a>.
+        </p>
+      )}
+      <p>
+        Your executor never needs this download, or this website. The printed
+        instructions use the two standard tools directly.
+      </p>
+    </section>
+
+    <section>
+      <h2>The steps</h2>
+      <p>
+        These are the project's own quickstart steps, pulled from the README at
+        build time so they can never drift from the code. Run each one and read
+        what it says before moving on.
+      </p>
+      <Mirrored file="README.md" label="Quickstart, from the project README">
+        <Quickstart.Content />
+      </Mirrored>
+    </section>
+
+    <section>
+      <h2>Then the physical part</h2>
+      <p>
+        Put one printed share with each of three holders and tell them what it
+        is. Store the encrypted file in at least two private places. Print the
+        Executor Instructions and store them with the will. The paper matters
+        more than the software; the software exists to make the paper true.
+      </p>
+      <p>
+        Questions along the way? The <a href="/faq">FAQ</a> covers the common
+        ones, including what happens if a share holder dies.
+      </p>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('learn', ({ data }) => !data.draft);
+  return articles.map((a) => ({ params: { slug: a.id }, props: { article: a } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+---
+<Base title={article.data.title} description={article.data.description}>
+  <div class="wrap prose">
+    <article class="section">
+      <h1>{article.data.title}</h1>
+      <p class="meta">
+        By Jamie Watters ·
+        <time datetime={article.data.pubDate.toISOString().slice(0, 10)}>
+          {article.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+        </time>
+      </p>
+      {article.data.affiliate && (
+        <p class="disclosure">
+          If you buy through links on this page, we earn a commission. It never
+          changes what we recommend. <a href="/money">How this site makes money</a>
+        </p>
+      )}
+      <Content />
+    </article>
+  </div>
+</Base>
+
+<style>
+  .meta { color: var(--ink-soft); font-size: var(--text-sm); }
+  .disclosure {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+  }
+</style>

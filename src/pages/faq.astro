@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { REPO_URL } from '../config';
+
+const faqs = [
+  {
+    q: 'What if I lose the passphrase?',
+    a: `While you are alive, nothing is lost: the passphrase lives in your password manager, and if it ever went missing from there, any two of the three printed shares reconstruct it. If the passphrase and two shares are all gone, the file stays sealed forever. There is no reset and no back door; that is the security property working, not failing.`,
+  },
+  {
+    q: 'What if a share holder dies?',
+    a: `Nothing is lost. The split is 2-of-3, so any two remaining shares still open the file. When a holder dies or a share goes missing, re-key with the rotate script: it issues a new passphrase and fresh shares, and proves the old passphrase dead before declaring success.`,
+  },
+  {
+    q: 'Why not just a spreadsheet?',
+    a: `A plain spreadsheet is unencrypted, so it either leaks everything or gets locked with a password nobody will have on the day. Executor File keeps the readable simplicity of a flat file and adds sealed encryption, shared keys, validation that rejects credentials, and a printed recovery page. If a spreadsheet is genuinely all you need, use one; it is better than nothing, and nothing is what most executors get.`,
+  },
+  {
+    q: 'Why not a vault service?',
+    a: `A hosted vault is a bet that a company outlives you, keeps its terms and keeps its door open. Several well-funded services in exactly this category have closed or changed hands; the record is on the Built to last page. A file your family keeps makes no such bet.`,
+  },
+  {
+    q: 'Why is there no app?',
+    a: `An app is a dependency with a lifespan, and this design refuses dependencies with lifespans. The tool is a set of short scripts you can read in one sitting, and recovery deliberately needs none of them: two standard commands open the file on any Mac or Linux machine.`,
+  },
+  {
+    q: 'What does my solicitor need to know?',
+    a: `That an encrypted register exists, where a copy lives, and that the printed Executor Instructions are stored with the will. A solicitor can also be one of the three share holders. Nothing about the design needs their systems to change; the file opens on an ordinary computer.`,
+  },
+  {
+    q: 'Does anything leave my machine?',
+    a: `Nothing. There is no server, no account, no telemetry, no sync. Encryption, splitting and validation all run locally, and the tools work with the network cable unplugged.`,
+  },
+  {
+    q: 'What about Windows?',
+    a: `Creating the register expects a Mac or Linux machine. Recovering on Windows works and has its own printed sheet, which is honest about the cost: the secret-sharing tool has no trustworthy native Windows build, so the sheet uses Microsoft's built-in WSL feature, which needs administrator rights and one restart.`,
+  },
+  {
+    q: 'Can I use 3-of-5 instead of 2-of-3?',
+    a: `No. One deeply tested scheme is the point: every printed page, test and instruction assumes 2-of-3, so the executor's page never depends on remembering which variant you chose. The code is MIT licensed; fork it if your situation truly needs a different split.`,
+  },
+  {
+    q: 'Is this legal advice?',
+    a: `No. The register records practical guidance: where things are and what you wanted done. The will decides, along with beneficiary designations, ownership rights, provider terms and the law. Take estate-document wording to whoever drafts the will.`,
+  },
+];
+---
+<Base
+  title="FAQ"
+  description="Common questions about Executor File: lost passphrases, dead share holders, why there is no app, Windows, and what your solicitor needs to know."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Frequently asked questions</h1>
+      {faqs.map((f) => (
+        <details class="faq">
+          <summary><h2>{f.q}</h2></summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+      <p>
+        Something not covered? Open an issue{' '}
+        <a href={`${REPO_URL}/issues`}>on GitHub</a>. Never paste real register
+        contents, shares or passphrases into an issue.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .faq {
+    border-bottom: 1px solid var(--rule);
+    padding-block: var(--space-3);
+  }
+  .faq summary {
+    cursor: pointer;
+    list-style-position: outside;
+  }
+  .faq summary h2 {
+    display: inline;
+    font-size: var(--text-lg);
+    margin: 0;
+  }
+  .faq p {
+    margin-top: var(--space-3);
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,19 @@
+# Build output and caches
+dist/
+.astro/
+node_modules/
+
+# Fetched at build time from the pinned tool repo; never committed.
+.mirror/
+src/mirrored/
+
+# Generated at build time
+public/og/
+
+# OS noise
+.DS_Store
+
+# Local env
+.env
+.env.*
+.netlify/

@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { REPO_URL } from '../config';
+---
+<Base
+  title="About"
+  description="About Executor File and this site: what the tool is, who makes it, and how to get in touch."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>About</h1>
+      <p class="lede">
+        Executor File is a free, open-source tool that gives your executor a
+        map: an encrypted register of every account, asset and liability you
+        own, and one printed page that says how to open it.
+      </p>
+      <p>
+        It is made by <strong>Jamie Watters</strong>: 38 years in corporate
+        technology, building open tools in public at{' '}
+        <a href="https://jamiewatters.work">jamiewatters.work</a>. He built
+        this after twice being the executor with nothing to go on;
+        <a href="/story">the story is here</a>.
+      </p>
+      <h2>Contact</h2>
+      <ul>
+        <li>
+          <strong>Bugs, questions and ideas:</strong>
+          <a href={`${REPO_URL}/issues`}>GitHub issues</a> is the canonical
+          channel. Never paste real register contents, shares or passphrases
+          into an issue.
+        </li>
+        <li>
+          <strong>Security reports:</strong> use GitHub's private vulnerability
+          reporting, as described on <a href="/why-trust-this">Why trust this</a>.
+        </li>
+      </ul>
+      <h2>This site</h2>
+      <p>
+        The site is static, open source in the same spirit as the tool, and
+        built so that its technical claims are pulled from the tool's
+        repository at build time rather than typed by hand.{' '}
+        <a href="/money">How this site makes money</a> and{' '}
+        <a href="/privacy">Privacy</a> cover the rest.
+      </p>
+    </section>
+  </div>
+</Base>

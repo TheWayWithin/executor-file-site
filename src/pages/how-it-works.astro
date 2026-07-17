@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import Mirrored from '../components/Mirrored.astro';
+import * as HowDiagram from '../mirrored/how-diagram.md';
+import * as ThreatModel from '../mirrored/threat-model.md';
+import * as PlatformLegacy from '../mirrored/platform-legacy.md';
+---
+<Base
+  title="How it works"
+  description="How Executor File works: a plain text register, sealed with age encryption, its key split 2-of-3 across three printed shares. No account, no configuration, no service."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>How it works</h1>
+      <p class="lede">
+        You write one file. One command seals it. Three people each hold one
+        printed share of the key. There is no account to create and nothing to
+        configure.
+      </p>
+
+      <Mirrored file="README.md" label="The flow, from the project README">
+        <HowDiagram.Content />
+      </Mirrored>
+    </section>
+
+    <section>
+      <h2>2-of-3, for humans</h2>
+      <p>
+        Think of the register as a map and the passphrase as the key to the box
+        it is locked in. The key is cut into three pieces and three people you
+        trust each keep one piece. Any two pieces remake the key; one piece
+        alone is useless.
+      </p>
+      <ul>
+        <li>Nobody could read the file while you were alive, because no one person holds a working key.</li>
+        <li>Losing one share loses nothing. A holder can die, move away or lose the paper, and the file still opens.</li>
+        <li>Your own way back in is simpler: the passphrase sits in your password manager, like every other credential you own. The shares exist for your executor, not for you.</li>
+      </ul>
+      <p>
+        Worried this sounds technical? The sealing is one command, and the
+        opening is three, printed on the page your executor will hold. If you
+        can copy and paste, both ends of this are within reach.
+      </p>
+    </section>
+
+    <section>
+      <h2>The threat model, in plain English</h2>
+      <p>
+        Below is the project's own threat table, pulled from the README at build
+        time. Two lines of translation first:
+      </p>
+      <ul>
+        <li>
+          <strong>What it defends:</strong> a leaked copy of the encrypted file
+          (useless without two shares), a nosy or compromised share holder (one
+          share reveals nothing), credential theft through the register (no
+          credentials are in it), and the project itself disappearing (recovery
+          uses two standard tools that are not ours).
+        </li>
+        <li>
+          <strong>What it does not defend:</strong> a compromised computer, two
+          share holders acting together, or a lost passphrase with fewer than
+          two shares. If you lose the passphrase and two of the three shares,
+          the file stays sealed forever. That is not a flaw to apologise for; it
+          is the design working. There is no back door to lose control of.
+        </li>
+      </ul>
+      <Mirrored file="README.md" label="Threat model, from the project README">
+        <ThreatModel.Content />
+      </Mirrored>
+      <p>
+        The fuller version, including what is explicitly not defended, is on{' '}
+        <a href="/why-trust-this">Why trust this</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Platform legacy tools come first</h2>
+      <p>
+        Apple, Google and Meta run their own legacy-access schemes, and in the
+        US those settings outrank your will. Set them deliberately and record
+        what you set in the register. The project README covers this in full:
+      </p>
+      <Mirrored file="README.md" label="From the project README">
+        <PlatformLegacy.Content />
+      </Mirrored>
+    </section>
+
+    <section>
+      <h2>When you're ready</h2>
+      <p>
+        The whole setup is about an hour at the computer, one command at a time,
+        then a trip to the printer. <a href="/get-started">Get started</a>, or{' '}
+        <a href="/sample">look at a sample Executor File</a> first.
+      </p>
+    </section>
+  </div>
+</Base>

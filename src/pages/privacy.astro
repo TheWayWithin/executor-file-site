@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Privacy"
+  description="What this site collects: aggregate page counts via Plausible, no cookies, nothing on the recovery pages. What the tool collects: nothing, because there is no server."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Privacy</h1>
+      <p class="lede">
+        Short version: this site counts pages, not people, and the recovery
+        pages count nothing at all.
+      </p>
+
+      <h2>This website</h2>
+      <ul>
+        <li>
+          Analytics are <a href="https://plausible.io">Plausible</a>, a
+          privacy-respecting counter that uses no cookies and collects no
+          personal data, so there is no consent banner because there is nothing
+          to consent to.
+        </li>
+        <li>
+          <strong>The recovery pages carry no analytics at all.</strong>
+          <a href="/recover">/recover</a> and its Windows variant load no
+          analytics script, no fonts from third parties, nothing that phones
+          anywhere. A grieving person's visit is not data.
+        </li>
+        <li>There are no accounts, no forms and no newsletter, so this site holds no personal information about you.</li>
+        <li>Articles may contain affiliate links, disclosed on the page; what a merchant collects after you click is governed by their policy, not ours.</li>
+      </ul>
+
+      <h2>The tool</h2>
+      <p>
+        Executor File the tool runs entirely on your machine. Nothing leaves it:
+        no server, no account, no telemetry, no sync. The scripts work with the
+        network unplugged, and the register they produce is yours, encrypted,
+        on your own storage.
+      </p>
+
+      <h2>Questions</h2>
+      <p>
+        Anything unclear, ask in the open:{' '}
+        <a href="https://github.com/TheWayWithin/executor-file/issues">GitHub issues</a>.
+      </p>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,47 @@
+---
+// Wraps content pulled from the tool repo at build time, with a provenance
+// line naming the source file and pinned commit. The tool repo is the single
+// source of truth; the site renders these blocks, it never hand-copies them.
+import { PIN, REPO_URL } from '../config';
+
+interface Props {
+  file: string;
+  label?: string;
+}
+const { file, label } = Astro.props;
+const href = `${REPO_URL}/blob/${PIN.ref}/${file}`;
+---
+<figure class="mirrored">
+  <div class="mirrored-body table-scroll">
+    <slot />
+  </div>
+  <figcaption>
+    {label ?? 'Pulled from the tool repo at build time'}:{' '}
+    <a href={href}><code>{file}</code> at <code>{PIN.ref.slice(0, 7)}</code></a>
+  </figcaption>
+</figure>
+
+<style>
+  .mirrored {
+    margin: var(--space-4) 0;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--paper-raised);
+  }
+  .mirrored-body {
+    padding: var(--space-3) var(--space-4);
+  }
+  figcaption {
+    border-top: 1px solid var(--rule);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+  }
+</style>
+
+<style is:global>
+  /* Mirrored blocks render repo headings one level down visually. */
+  .mirrored-body h2 { font-size: var(--text-lg); margin-top: var(--space-3); }
+  .mirrored-body h2:first-child { margin-top: 0; }
+  .mirrored-body h3 { font-size: var(--text-base); }
+</style>

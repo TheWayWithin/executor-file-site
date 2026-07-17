@@ -1,0 +1,33 @@
+---
+import Recover from '../../layouts/Recover.astro';
+import * as Instructions from '../../mirrored/executor-instructions.md';
+---
+<Recover
+  title="For executors: opening the Executor File"
+  description="How to open an Executor File: the same instructions as the printed page, with the three commands. No account, no software of ours, nothing to buy."
+>
+  <p class="variant-note no-print">
+    This page is the printed Executor Instructions, word for word. If the only
+    trusted computer available runs Windows,{' '}
+    <a href="/recover/windows">use the Windows sheet instead</a>.
+  </p>
+  <article class="recover-doc">
+    <Instructions.Content />
+  </article>
+</Recover>
+
+<style is:global>
+  .variant-note {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    font-size: 1.0625rem;
+    margin-bottom: var(--space-5);
+  }
+  @media print {
+    /* The guide is designed as two printed pages; break before page two. */
+    .recover-doc h2:nth-of-type(2) { page-break-before: always; }
+    .recover-doc hr { display: none; }
+  }
+</style>

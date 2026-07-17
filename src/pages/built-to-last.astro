@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import { REPO_URL } from '../config';
+
+const graveyard = [
+  {
+    name: 'Lantern',
+    line: 'Retired its end-of-life planning service; users were given a support contact and a deadline to extract their own plans.',
+    source: 'https://www.wellthy.com/lantern',
+    sourceLabel: 'wellthy.com/lantern',
+  },
+  {
+    name: 'Deathswitch',
+    line: 'A dead man’s switch service for posthumous messages; the service itself is now defunct.',
+    source: 'https://en.wikipedia.org/wiki/Deathswitch',
+    sourceLabel: 'Wikipedia',
+  },
+  {
+    name: 'Legacy Locker',
+    line: 'An early digital-estate vault, acquired by PasswordBox in 2013; the product no longer exists.',
+    source: 'https://techcrunch.com/2013/12/05/passwordbox-acquires-legacy-locker/',
+    sourceLabel: 'TechCrunch, 2013',
+  },
+  {
+    name: 'Beyond',
+    line: 'A UK funeral and estate comparison service; its domain now serves another company’s content.',
+    source: 'https://beyond.life',
+    sourceLabel: 'beyond.life',
+  },
+  {
+    name: 'Farewill',
+    line: 'UK online will-writing service, sold to Dignity in 2024. An ownership change, not a shutdown, and users’ documents moved with it.',
+    source: 'https://techcrunch.com/2024/10/03/dignity-buys-online-will-writing-platform-farewill/',
+    sourceLabel: 'TechCrunch, October 2024',
+  },
+  {
+    name: 'Everplans',
+    line: 'A digital estate-planning vault, sold twice; now owned by a company in the funeral-sales sector. An ownership change, stated as such.',
+    source: 'https://www.kates-boylston.com/precoa-acquires-everplans',
+    sourceLabel: 'Kates-Boylston',
+  },
+  {
+    name: 'Cake',
+    line: 'An end-of-life planning platform, acquired by a funeral-home operator. An ownership change, stated as such.',
+    source: 'https://www.foundationpartners.com/foundation-partners-group-acquires-cake/',
+    sourceLabel: 'Foundation Partners',
+  },
+];
+---
+<Base
+  title="Built to last"
+  description="Why Executor File is a file and not a service: plain YAML, stock age and ssss, and paper, chosen so the register outlives the tool, the company that does not exist, and the maker."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Built to last</h1>
+      <p class="lede">
+        An estate register has one job that most software never faces: it must
+        still work on the worst day, years from now, for someone who is not you.
+        Every design choice in Executor File follows from that.
+      </p>
+    </section>
+
+    <section>
+      <h2>The file outlives the tool</h2>
+      <p>
+        The register is plain YAML: readable in any text editor, on any
+        computer, this decade or next. The encryption is{' '}
+        <a href="https://age-encryption.org">age</a>, an open, formally
+        specified format with independent implementations. The key splitting is{' '}
+        <code>ssss</code>, an implementation of Shamir's Secret Sharing, a
+        construction from 1979 that is information-theoretic rather than
+        fashionable. The final artefact is paper, stored with the will.
+      </p>
+      <p>
+        None of those four things depends on this project existing. The scripts
+        are a convenience for you, the owner; your executor's printed page names
+        the standard tools, not us. If the repository were deleted tomorrow,
+        every sealed Executor File would still open with two commands.
+      </p>
+      <p>
+        This is the file-over-app argument, applied where it matters most. Notes
+        apps and photo services can afford to bet on their own longevity. A
+        register your family opens after you have died cannot.
+      </p>
+    </section>
+
+    <section>
+      <h2>The service graveyard</h2>
+      <p>
+        Every service on this list promised to be there when your family needed
+        it. This is why Executor File is a file.
+      </p>
+      <div class="table-scroll">
+        <table>
+          <caption class="visually-hidden">Estate and end-of-life services that closed or changed ownership</caption>
+          <thead>
+            <tr><th scope="col">Service</th><th scope="col">What happened</th><th scope="col">Source</th></tr>
+          </thead>
+          <tbody>
+            {graveyard.map((g) => (
+              <tr>
+                <td><strong>{g.name}</strong></td>
+                <td>{g.line}</td>
+                <td><a href={g.source}>{g.sourceLabel}</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The acquisitions above are ownership changes, not failures, and are
+        stated as such. The point is narrower and harder to argue with: a hosted
+        service is a bet that a company outlives you, keeps its terms, and keeps
+        its door open. A file in your family's hands makes no bet at all.
+      </p>
+    </section>
+
+    <section>
+      <h2>What lasting actually requires</h2>
+      <ul>
+        <li><strong>No dependency on us.</strong> Recovery is two standard commands. The project could vanish; the instructions would not notice.</li>
+        <li><strong>No dependency on a business model.</strong> There is no revenue behind the tool, so there is no revenue that can run out. It is MIT licensed and <a href={REPO_URL}>public</a>.</li>
+        <li><strong>No format lock.</strong> The register validates against standard JSON Schema. Any conforming tool can check it; any editor can read it.</li>
+        <li><strong>Paper at the end.</strong> The one component with a thousand-year track record. The printed page and shares work with the power off.</li>
+      </ul>
+      <p>
+        If you want to check any of this rather than take it on trust,{' '}
+        <a href="/why-trust-this">Why trust this</a> is the page for you.
+      </p>
+    </section>
+  </div>
+</Base>

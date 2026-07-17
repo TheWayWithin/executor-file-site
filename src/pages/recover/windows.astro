@@ -1,0 +1,16 @@
+---
+import Recover from '../../layouts/Recover.astro';
+import * as WindowsSheet from '../../mirrored/windows-recovery.md';
+---
+<Recover
+  title="Opening the Executor File on Windows"
+  description="The Windows recovery sheet: opening an Executor File on Windows 10 or 11 using WSL. The same three commands, with the honest extra setup cost stated upfront."
+>
+  <p class="variant-note no-print">
+    This is the Windows variant. On a Mac or Linux computer,{' '}
+    <a href="/recover">use the main instructions instead</a>.
+  </p>
+  <article class="recover-doc">
+    <WindowsSheet.Content />
+  </article>
+</Recover>

@@ -1,0 +1,224 @@
+---
+import Base from '../layouts/Base.astro';
+import * as OutOfScope from '../mirrored/out-of-scope.md';
+import { REPO_URL, PIN } from '../config';
+---
+<Base
+  title="Executor File"
+  description="Everything your executor will need, in one encrypted file. A free, open-source register of every account, asset and liability you own, and one printed page that tells your executor how to open it."
+>
+  <div class="wrap">
+    <section class="hero">
+      <h1>Everything your executor will need, in one&nbsp;encrypted&nbsp;file.</h1>
+      <p class="lede">
+        Executor File is a free, open-source register of every account, asset and
+        liability you own, and one printed page that tells your executor how to
+        open it. A file your family keeps. Not a service that can die.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/sample">See a sample Executor File</a>
+        <a class="btn btn-secondary" href="/get-started">Get started</a>
+        <a class="cta-text" href={REPO_URL}>Read the code</a>
+      </div>
+      <p class="door-two">
+        Someone has died and you have the printed page?{' '}
+        <a href="/recover">Open the Executor File</a>
+      </p>
+    </section>
+
+    <section class="section artefacts" aria-labelledby="artefacts-h">
+      <h2 id="artefacts-h">Two artefacts carry everything</h2>
+      <div class="artefact-grid">
+        <div class="panel artefact">
+          <p class="artefact-name"><code>estate.yaml.age</code></p>
+          <h3>Your Executor File</h3>
+          <p>
+            An encrypted register of every account, asset and liability, with what
+            you want done about each one. It stores pointers, never passwords. It
+            can be backed up anywhere, because on its own it opens nothing.
+          </p>
+        </div>
+        <div class="panel artefact">
+          <p class="artefact-name">One printed page</p>
+          <h3>The Executor Instructions</h3>
+          <p>
+            Stored with the will. It tells your executor where the file is, who
+            holds the three key shares, and the three commands that open it.
+            Written for a non-technical person under stress.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="absence-h">
+      <h2 id="absence-h">What is not here is the point</h2>
+      <ul class="absence prose">
+        <li>No account.</li>
+        <li>No server.</li>
+        <li>No subscription.</li>
+        <li>No credentials stored.</li>
+        <li>No company that can shut down.</li>
+      </ul>
+      <p class="prose">
+        Your family keeps a file and one printed page. That is the whole product.
+        Every hosted service in this category is a bet that a company outlives
+        you. <a href="/built-to-last">A file makes no such bet.</a>
+      </p>
+    </section>
+
+    <section class="section" aria-labelledby="how-h">
+      <h2 id="how-h">How it works, in three steps</h2>
+      <ol class="steps">
+        <li>
+          <h3>Write it</h3>
+          <p>
+            Fill in a plain text register: every account, what it is, where the
+            login lives, and what you want done. About an hour, one entry at a time.
+          </p>
+        </li>
+        <li>
+          <h3>Seal it</h3>
+          <p>
+            One command encrypts it and splits the key into three printed shares.
+            Any two open the file; one alone opens nothing. It proves the chain
+            works before it reports success.
+          </p>
+        </li>
+        <li>
+          <h3>Print it</h3>
+          <p>
+            Print the one-page instructions and store them with the will. Give one
+            share each to three people you trust. Done.
+          </p>
+        </li>
+      </ol>
+      <p><a href="/how-it-works">The full picture, including the threat model</a></p>
+    </section>
+
+    <section class="section" aria-labelledby="believe-h">
+      <h2 id="believe-h">Reasons to believe</h2>
+      <ul class="believe-strip">
+        <li><strong>Open source, MIT.</strong> Read every line before trusting it.</li>
+        <li><strong>Recovery uses two standard tools.</strong> Stock <code>age</code> and <code>ssss</code>. If the project vanished tomorrow, the file still opens.</li>
+        <li><strong>No credentials, enforced.</strong> The validators actively reject credential-shaped data.</li>
+        <li><strong>Honest limits, published.</strong> What it does not defend is stated as plainly as what it does.</li>
+      </ul>
+      <p><a href="/why-trust-this">Why trust this</a></p>
+    </section>
+
+    <section class="section story-line">
+      <p class="prose">
+        Built by someone who has been the executor with nothing to go on.{' '}
+        <a href="/story">Read the story.</a>
+      </p>
+    </section>
+
+    <section class="section refuses prose" aria-labelledby="refuses-h">
+      <h2 id="refuses-h">What it refuses to do</h2>
+      <div class="mirrored-block">
+        <OutOfScope.Content />
+      </div>
+      <p class="pulled-note">
+        Pulled from the project README at build time, commit{' '}
+        <a href={`${REPO_URL}/blob/${PIN.ref}/README.md`}><code>{PIN.ref.slice(0, 7)}</code></a>.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .hero {
+    padding-block: var(--space-7) var(--space-5);
+    max-width: 54rem;
+  }
+  .hero h1 {
+    font-size: var(--text-hero);
+    margin-bottom: var(--space-4);
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+  .cta-text { font-weight: 600; }
+  .door-two {
+    margin-top: var(--space-6);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: var(--text-base);
+    max-width: var(--measure);
+  }
+  .artefact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: var(--space-4);
+  }
+  .artefact h3 { margin-top: var(--space-2); }
+  .artefact-name {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+    margin-bottom: 0;
+  }
+  .absence {
+    list-style: none;
+    padding: 0;
+    font-size: var(--text-xl);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+  .absence li { margin-bottom: var(--space-1); }
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-4);
+  }
+  .steps li {
+    counter-increment: step;
+    border-top: 3px solid var(--accent);
+    padding-top: var(--space-3);
+  }
+  .steps h3::before {
+    content: counter(step) '. ';
+    color: var(--accent);
+  }
+  .steps h3 { margin-top: 0; }
+  .believe-strip {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-3) var(--space-4);
+    max-width: none;
+  }
+  .believe-strip li {
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: var(--space-3);
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+  .story-line {
+    border-block: 1px solid var(--rule);
+    padding-block: var(--space-4);
+  }
+  .story-line p {
+    font-size: var(--text-lg);
+    margin: 0;
+  }
+  .pulled-note {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+  }
+</style>
+
+<style is:global>
+  .mirrored-block h2 { display: none; }
+</style>

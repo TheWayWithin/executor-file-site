@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import Mirrored from '../components/Mirrored.astro';
+import * as SampleReport from '../mirrored/sample-report.md';
+import exampleYaml from '../mirrored/estate.example.yaml?raw';
+import { PIN, REPO_URL } from '../config';
+---
+<Base
+  title="A sample Executor File"
+  description="What an Executor File actually looks like: the example register, the triage report the tool renders from it, and the printed page. All generated from the repository at build time."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>A sample Executor File</h1>
+      <p class="lede">
+        Before downloading anything, see the real artefacts. Everything on this
+        page is generated from the project's example register, with dummy data,
+        at build time.
+      </p>
+    </section>
+
+    <section>
+      <h2>The register</h2>
+      <p>
+        Plain YAML, readable in any editor. Notice what is absent: no passwords,
+        no full account numbers. Entries point at where things are and say what
+        you want done.
+      </p>
+      <Mirrored file="examples/estate.example.yaml" label="The example register, dummy data throughout">
+        <pre tabindex="0"><code>{exampleYaml}</code></pre>
+      </Mirrored>
+    </section>
+
+    <section>
+      <h2>The triage report</h2>
+      <p>
+        After decrypting, the executor can render the register into a sorted,
+        printable report: urgent things first, recurring charges by burn rate.
+        Helpful, never required. This one was produced by running the tool's own{' '}
+        <code>render.sh</code> on the example register during the site build.
+      </p>
+      <Mirrored file="scripts/render.sh" label="Report generated at build time by the tool's render script">
+        <SampleReport.Content />
+      </Mirrored>
+    </section>
+
+    <section>
+      <h2>The printed page</h2>
+      <p>
+        The third artefact is the two-page Executor Instructions, stored with
+        the will. The live copy is at <a href="/recover">/recover</a>, exactly
+        as it prints; the template it is filled from is{' '}
+        <a href={`${REPO_URL}/blob/${PIN.ref}/templates/EXECUTOR-INSTRUCTIONS.md`}>in the repository</a>.
+      </p>
+      <p>
+        Ready to make your own? <a href="/get-started">Get started</a>.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style is:global>
+  .mirrored-body pre { max-height: 34rem; overflow: auto; }
+</style>

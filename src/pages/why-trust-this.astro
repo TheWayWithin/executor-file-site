@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Mirrored from '../components/Mirrored.astro';
+import * as Security from '../mirrored/security.md';
+import { STATS, PIN, REPO_URL, REPO_TREE_URL } from '../config';
+
+const scriptCount = STATS.scripts.length;
+const totalLines = STATS.scriptTotalLines;
+const ciList = STATS.ciOses.join(' and ');
+---
+<Base
+  title="Why trust this"
+  description="Why trust Executor File: read the scripts, check the threat model, and note what no maintainer can do. Every claim on this page is computed from the repository at build time."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Why trust this</h1>
+      <p class="lede">
+        You should not take this page's word for anything. Everything below is
+        either pulled from the repository at build time or stated so you can
+        verify it yourself in one sitting.
+      </p>
+    </section>
+
+    <section>
+      <h2>Read the scripts. They are short on purpose.</h2>
+      <p>
+        The whole tool is {scriptCount} scripts totalling {totalLines} lines,
+        most of which are comments, checks and printed explanations. They are
+        thin wrappers around two standard tools, written to be read before they
+        are run. <a href={`${REPO_TREE_URL}/scripts`}>Read them here.</a>
+      </p>
+      <div class="table-scroll">
+        <table>
+          <caption class="visually-hidden">Script line counts, computed from the pinned repository</caption>
+          <thead>
+            <tr><th scope="col">Script</th><th scope="col">Lines</th></tr>
+          </thead>
+          <tbody>
+            {STATS.scripts.map((s) => (
+              <tr>
+                <td><a href={`${REPO_URL}/blob/${PIN.ref}/scripts/${s.name}`}><code>{s.name}</code></a></td>
+                <td>{s.lines}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="pulled-note">
+        Line counts computed from the repository at build time, commit{' '}
+        <code>{PIN.ref.slice(0, 7)}</code>. Nothing on this page is typed by hand.
+      </p>
+    </section>
+
+    <section>
+      <h2>No maintainer can recover a lost passphrase</h2>
+      <p>
+        There is no back door, no escrow, no reset. Fewer than two shares plus
+        no password-manager entry means the file stays sealed forever. That is
+        a feature: a recovery route the maintainer holds is a recovery route an
+        attacker can take, and a company can lose. This design has neither.
+      </p>
+    </section>
+
+    <section>
+      <h2>Built by one person, designed so it does not need him</h2>
+      <p>
+        Recovery uses stock <a href="https://age-encryption.org">age</a>, an
+        audited and formally specified encryption format with independent
+        implementations, and <code>ssss</code>, an implementation of Shamir's
+        Secret Sharing. The printed page names those tools, not this project.
+        If the repository and its author both vanished, the recovery
+        instructions would still work unchanged.
+      </p>
+    </section>
+
+    <section>
+      <h2>The security policy, in full</h2>
+      <p>
+        This is the project's SECURITY.md, pulled at build time: how to report
+        a vulnerability, what is defended, and what is explicitly not defended.
+        Stated limits are a promise about honesty, and they are the part to
+        read most carefully.
+      </p>
+      <Mirrored file="SECURITY.md" label="The project security policy">
+        <Security.Content />
+      </Mirrored>
+    </section>
+
+    <section>
+      <h2>Repository facts</h2>
+      <ul>
+        <li><strong>Licence:</strong> {STATS.license}, read from <a href={`${REPO_URL}/blob/${PIN.ref}/LICENSE`}>LICENSE</a>.</li>
+        <li><strong>Tests:</strong> a scripted test suite runs in CI on {ciList}, read from <a href={`${REPO_URL}/blob/${PIN.ref}/.github/workflows/ci.yml`}>the CI workflow</a>. Run it yourself: <code>tests/run-tests.sh</code>.</li>
+        <li><strong>Schema:</strong> the register format is standard JSON Schema (<code>{STATS.schemaDialect.replace('https://json-schema.org/draft/', 'draft ').replace('/schema', '')}</code>), validatable by any conforming tool without our scripts.</li>
+      </ul>
+      <p class="pulled-note">
+        Each fact above is computed from the repository at build time, commit{' '}
+        <code>{PIN.ref.slice(0, 7)}</code>. Facts that cannot be computed are
+        left off this page rather than estimated.
+      </p>
+    </section>
+
+    <section>
+      <h2>And the maker</h2>
+      <p>
+        Built by Jamie Watters: 38 years in corporate technology, building open
+        tools in public at <a href="https://jamiewatters.work">jamiewatters.work</a>.
+        He was twice the executor with nothing to go on;{' '}
+        <a href="/story">that story is here</a>, kept separate because a reason
+        to build something is not evidence that it works. The evidence is above.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .pulled-note {
+    font-size: var(--text-sm);
+    color: var(--ink-soft);
+  }
+  table { max-width: 28rem; }
+</style>

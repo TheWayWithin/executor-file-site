@@ -1,0 +1,53 @@
+name: site-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # Fetches the tool repo at the pinned commit and fails if any mirrored
+      # file is missing or does not byte-match its pinned SHA-256 (drift test).
+      - name: Drift test and build
+        run: npm run build
+
+      - name: Internal links resolve
+        run: npm run check:links
+
+      - name: Voice rules hold
+        run: npm run check:voice
+
+      # /recover must exist, carry no analytics or affiliate links, and render
+      # every command block from the pin-verified instructions.
+      - name: Recover-page guarantees
+        run: npm run check:recover
+
+  recover-live:
+    # Live test that the permanent /recover URL resolves on the deployed site.
+    # Runs once the SITE_URL repository variable is set (after the Netlify
+    # site exists); polls to ride out deploy lag.
+    if: github.event_name == 'push' && vars.SITE_URL != ''
+    runs-on: ubuntu-latest
+    needs: build-and-check
+    steps:
+      - name: /recover resolves on the live site
+        run: |
+          url="${{ vars.SITE_URL }}/recover"
+          for i in $(seq 1 20); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" -L "$url")
+            echo "attempt $i: $url -> $code"
+            if [ "$code" = "200" ]; then exit 0; fi
+            sleep 30
+          done
+          echo "FAIL: $url did not return 200"
+          exit 1

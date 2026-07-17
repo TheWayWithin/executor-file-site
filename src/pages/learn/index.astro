@@ -1,0 +1,61 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('learn', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<Base
+  title="Learn"
+  description="Practical writing on digital estates: finding every account someone owned, what password managers hand over, and why hosted legacy services keep disappearing."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Learn</h1>
+      <p class="lede">
+        Practical writing on digital estates: finding accounts, what your
+        executor will actually face, and how to leave less detective work
+        behind.
+      </p>
+      {articles.length === 0 ? (
+        <p>
+          The first articles are in review and will appear here soon. In the
+          meantime, <a href="/how-it-works">how Executor File works</a> is the
+          best place to start.
+        </p>
+      ) : (
+        <ul class="article-list">
+          {articles.map((a) => (
+            <li>
+              <h2><a href={`/learn/${a.id}`}>{a.data.title}</a></h2>
+              <p>{a.data.description}</p>
+              <p class="meta">
+                <time datetime={a.data.pubDate.toISOString().slice(0, 10)}>
+                  {a.data.pubDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </time>
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p class="fine">
+        Some articles in this section carry affiliate links, always disclosed at
+        the top of the page. <a href="/money">How this site makes money</a>
+        explains the policy in full. Nothing anywhere else on this site is
+        monetised, and the tool itself is free and unconnected to any of it.
+      </p>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .article-list { list-style: none; padding: 0; }
+  .article-list li {
+    border-bottom: 1px solid var(--rule);
+    padding-block: var(--space-4);
+  }
+  .article-list h2 { margin-top: 0; margin-bottom: var(--space-2); }
+  .meta { color: var(--ink-soft); font-size: var(--text-sm); margin: 0; }
+  .fine { color: var(--ink-soft); font-size: var(--text-sm); margin-top: var(--space-5); }
+</style>

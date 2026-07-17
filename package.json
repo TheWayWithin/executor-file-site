@@ -1,0 +1,26 @@
+{
+  "name": "executor-file-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "executorfile.com: the site for Executor File, an encrypted register your executor can open with two standard tools.",
+  "scripts": {
+    "fetch": "node scripts/fetch-mirror.mjs",
+    "pin:refresh": "node scripts/fetch-mirror.mjs --refresh-hashes",
+    "og": "node scripts/make-og.mjs",
+    "dev": "npm run fetch && npm run og && astro dev",
+    "build": "npm run fetch && npm run og && astro build",
+    "check:links": "node scripts/check-links.mjs",
+    "check:voice": "node scripts/check-voice.mjs",
+    "check:recover": "node scripts/check-recover.mjs",
+    "verify": "npm run build && npm run check:links && npm run check:voice && npm run check:recover"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/inter": "^5.2.8",
+    "astro": "^7.1.1",
+    "sharp": "^0.35.3"
+  }
+}

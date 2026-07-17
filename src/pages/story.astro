@@ -1,0 +1,53 @@
+---
+// Layout-only placeholder. Jamie writes this page himself, in his own voice;
+// see NOTES.md. The structure below is the agreed shape: first person, plain,
+// two experiences in the order they happened, one paragraph of turn, ending
+// with the same two doors as the homepage.
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Why this exists"
+  description="The story behind Executor File, told plainly by its maker."
+>
+  <div class="wrap prose">
+    <section class="section">
+      <h1>Why this exists</h1>
+      <p class="lede placeholder-note">
+        Jamie is writing this page himself. It will be here before launch.
+      </p>
+
+      <div class="placeholder" aria-hidden="true">
+        <p class="placeholder-slot">[First experience, first person: executor of his father's estate with nothing to go on.]</p>
+        <p class="placeholder-slot">[Second experience: his son died recently; the record that was not there, and what kept firing into the silence.]</p>
+        <p class="placeholder-slot">[The turn: the thing he needed twice, and why it is a file.]</p>
+      </div>
+
+      <div class="doors">
+        <p>
+          <strong>Putting your affairs in order?</strong>
+          <a href="/get-started">Get started</a>
+        </p>
+        <p>
+          <strong>Someone has died and you have the printed page?</strong>
+          <a href="/recover">Open the Executor File</a>
+        </p>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .placeholder {
+    border: 1px dashed var(--rule);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin-block: var(--space-5);
+    color: var(--ink-soft);
+  }
+  .placeholder-slot { font-style: italic; }
+  .doors {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--rule);
+  }
+</style>
