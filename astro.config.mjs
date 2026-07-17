@@ -12,6 +12,8 @@ export default defineConfig({
     syntaxHighlight: false,
   },
   build: {
-    format: 'directory',
+    // File output so the permanent printed URL /recover answers 200 directly,
+    // with no redirect hop.
+    format: 'file',
   },
 });

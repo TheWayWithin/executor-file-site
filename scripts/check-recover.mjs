@@ -19,7 +19,7 @@ const fail = (msg) => {
   failed = true;
 };
 
-const pages = ['recover/index.html', 'recover/windows/index.html'];
+const pages = ['recover.html', 'recover/windows.html'];
 for (const rel of pages) {
   const p = path.join(dist, rel);
   if (!fs.existsSync(p)) {
@@ -54,8 +54,8 @@ const checkCommands = (srcFile, distFile) => {
   console.log(`ok: ${distFile} carries all ${blocks.length} command blocks from ${srcFile}`);
 };
 if (!failed) {
-  checkCommands('executor-instructions.md', 'recover/index.html');
-  checkCommands('windows-recovery.md', 'recover/windows/index.html');
+  checkCommands('executor-instructions.md', 'recover.html');
+  checkCommands('windows-recovery.md', 'recover/windows.html');
 }
 
 // Live check when a deployed URL is available.
