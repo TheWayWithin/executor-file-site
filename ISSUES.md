@@ -16,14 +16,14 @@ ID or another repo's. Raise issues here with `python3 ~/shared/scripts/repo-issu
 
 | ID | Title | Status | Severity | Detail | MC-SYNC |
 |----|-------|--------|----------|--------|---------|
-| EFS-ISS-6 | get-started has no bridge from webpage to working terminal: jumps into scripts/doctor.sh etc. with no clear 'download the tool -> unpack -> open Terminal -> cd into the folder' sequence first, so the commands fail for a real first-time user. THE core onboarding gap. | Open | critical | — | pending |
-| EFS-ISS-5 | get-started quickstart steps: numbered from 0 but render as bold prose not a real list; 'one command per step / several are interactive' framing confuses (user expected a single command). Fix list formatting + framing. | Open | medium | — | pending |
-| EFS-ISS-4 | get-started duplicates the install step: gentle 'What you need first' box AND a mirrored-README 'Quickstart (you, the owner)' section both say install age+ssss, in clashing tones — the developer-flavoured README quickstart shouldn't render verbatim on the non-technical owner page | Open | high | — | pending |
-| EFS-ISS-3 | get-started commands need unmistakable styling + placement: user can't tell 'brew install age ssss' is a command to type or where (needs distinct monospace/code presentation and an explicit 'open Terminal and type this') | Open | high | — | pending |
-| EFS-ISS-2 | get-started install step assumes terminal literacy: 'brew install age ssss' with no 'open the Terminal app and type this', no explanation of what a command/brew is — blocks the non-technical owner the site is meant to serve | Open | high | — | pending |
-| EFS-ISS-1 | get-started 'What you need first': three platform blocks (Mac/Ubuntu/Windows) don't signal 'pick the one for your computer' — reads as if all three are required | Open | high | — | pending |
 
 ## Recently closed
 
 | ID | Title | Status | Commit | Detail |
 |----|-------|--------|--------|--------|
+| EFS-ISS-6 | get-started has no bridge from webpage to working terminal | Closed | 3f6bf39 | One continuous eight-step ordered list runs download -> unpack -> open Terminal and cd into the folder -> install -> register -> seal -> print -> fire drill, with no stranded instruction. |
+| EFS-ISS-5 | get-started steps render as bold prose not a real list | Closed | 3f6bf39 | Setup is now a real `<ol>` numbered from 1 (styled step badges), not mirrored bold prose. |
+| EFS-ISS-4 | get-started duplicates the install step in clashing tones | Closed | 3f6bf39 | Stopped mirroring the developer README quickstart verbatim; install age+ssss now appears once, in the site's own voice. |
+| EFS-ISS-3 | get-started commands need unmistakable styling + placement | Closed | 3f6bf39 | Every command sits in a bordered block with a ">_ In the Terminal, paste this and press return" caption above the monospace line. |
+| EFS-ISS-2 | get-started install step assumes terminal literacy | Closed | 3f6bf39 | The Terminal is explained in plain words (what it is, how to open it) once, in the step before the first typed command. |
+| EFS-ISS-1 | get-started platform blocks don't signal 'pick one' | Closed | 3f6bf39 | Mac is the primary path shown inline; Linux and Windows sit behind clearly secondary "instead" toggles. |
