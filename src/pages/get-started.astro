@@ -44,25 +44,57 @@ import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL } from '.
     </section>
 
     <section id="download">
-      <h2>Download</h2>
+      <h2>Download and unpack</h2>
       {DOWNLOAD_ENABLED ? (
         <>
           <p>
-            Download the tagged release as a plain tarball. No GitHub account is
-            needed, and nothing about the download is tracked by us.
+            The download is one compressed file, like a zip, containing the
+            folder of scripts and examples. No GitHub account is needed, and
+            nothing about the download is tracked by us.
           </p>
           <p>
             <a class="btn btn-primary" href={RELEASE.tarballUrl}>Download Executor File {RELEASE_TAG}</a>
           </p>
+          <ol>
+            <li>
+              Click the button. The file{' '}
+              <code>{RELEASE.asset}</code> lands in your Downloads folder.
+            </li>
+            <li>
+              <strong>Mac:</strong> open Downloads in Finder and double-click
+              the file. It unpacks itself into a folder called{' '}
+              <code>executor-file-{RELEASE_TAG}</code>. That folder is the tool;
+              there is nothing to install.
+            </li>
+            <li>
+              Open the <strong>Terminal</strong> app (press{' '}
+              <kbd>Cmd</kbd>+<kbd>Space</kbd>, type "Terminal", press return),
+              then copy and paste this line and press return:
+              <pre tabindex="0"><code>cd ~/Downloads/executor-file-{RELEASE_TAG}</code></pre>
+              That points the Terminal at the folder you just unpacked. Every
+              command in "The steps" below is run from here.
+            </li>
+          </ol>
           <p>
-            SHA-256, read from the{' '}
-            <a href={RELEASE_URL}>release assets</a> at build time:
+            On Ubuntu or Debian Linux, unpack and enter the folder with{' '}
+            <code>tar -xzf {RELEASE.asset}</code> then{' '}
+            <code>cd executor-file-{RELEASE_TAG}</code>.
           </p>
-          <pre tabindex="0"><code>{RELEASE.sha256}  {RELEASE.asset}</code></pre>
-          <p>
-            To verify: run <code>shasum -a 256</code> on the downloaded file and
-            compare the result with the line above.
-          </p>
+          <details>
+            <summary>Optional: check the download is intact</summary>
+            <p>
+              In the Terminal, paste{' '}
+              <code>shasum -a 256 ~/Downloads/{RELEASE.asset}</code> and press
+              return. The long code it prints should match this one, read from
+              the <a href={RELEASE_URL}>release assets</a> when this page was
+              built:
+            </p>
+            <pre tabindex="0"><code>{RELEASE.sha256}</code></pre>
+            <p>
+              If it matches, the file arrived exactly as published. If it does
+              not, delete the file and download it again.
+            </p>
+          </details>
         </>
       ) : (
         <p class="panel">
@@ -81,8 +113,9 @@ import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL } from '.
       <h2>The steps</h2>
       <p>
         These are the project's own quickstart steps, pulled from the README at
-        build time so they can never drift from the code. Run each one and read
-        what it says before moving on.
+        build time so they can never drift from the code. Run each one in the
+        Terminal, from inside the folder you entered above, and read what it
+        says before moving on.
       </p>
       <Mirrored file="README.md" label="Quickstart, from the project README">
         <Quickstart.Content />
