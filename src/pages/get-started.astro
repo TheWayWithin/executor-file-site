@@ -1,134 +1,284 @@
 ---
 import Base from '../layouts/Base.astro';
-import Mirrored from '../components/Mirrored.astro';
-import * as Quickstart from '../mirrored/quickstart.md';
-import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL } from '../config';
+import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL, PIN } from '../config';
+const readmeUrl = `${REPO_URL}/blob/${PIN.ref}/README.md`;
 ---
 <Base
   title="Get started"
-  description="Set up your Executor File: about an hour at the computer, one command at a time. The result is an encrypted register and a printed page your executor can follow forever."
+  description="Set up your Executor File: about an hour at the computer, one step at a time. Fill in the register as a form, with no code to write. The result is an encrypted file and a printed page your executor can follow forever."
 >
   <div class="wrap prose">
     <section class="section">
       <h1>Get started</h1>
       <p class="lede">
-        This takes about an hour at the computer, one command at a time, in the
-        Terminal. If you can copy and paste, you can do this. The result is an
-        encrypted file and a printed page your executor can follow forever.
+        This takes about an hour at the computer, one step at a time. You fill
+        in your register as a form, like any web form, with no code to write.
+        The result is an encrypted file and a printed page your executor can
+        follow forever.
       </p>
       <p>
-        That is the honest shape of it: there is no app, and the Terminal is the
-        cost of a tool with nothing behind it that can shut down. Every step
-        below tells you what it does before you run it, and nothing is timed.
-        When you're ready.
+        Here is the honest shape of it. There is no app and no account. A few
+        of the steps happen in a program called the Terminal, where you paste a
+        line and press return. That is the cost of a tool with nothing behind
+        it that can shut down. Every command below tells you exactly where to
+        type it and what it does before you run it, and nothing is timed. Stop
+        whenever you like and pick up where you left off.
       </p>
     </section>
 
-    <section>
-      <h2>What you need first</h2>
-      <p>
-        Two small, standard tools: <code>age</code> (encryption) and{' '}
-        <code>ssss</code> (secret sharing). Both are free, open source and
-        packaged everywhere.
-      </p>
-      <ul>
-        <li><strong>Mac:</strong> <code>brew install age ssss</code> (if <code>brew</code> is not found, install it first from <a href="https://brew.sh">brew.sh</a>)</li>
-        <li><strong>Ubuntu or Debian Linux:</strong> <code>sudo apt install age ssss</code></li>
-        <li><strong>Windows:</strong> the register is created on a Mac or Linux machine; recovery on Windows has <a href="/recover/windows">its own printed sheet</a>.</li>
-      </ul>
-      <p>
-        Before anything else, the pre-flight check <code>scripts/doctor.sh</code>
-        confirms the tools are present and warns about hazards such as synced
-        folders. It changes nothing; it only looks.
-      </p>
-    </section>
+    {DOWNLOAD_ENABLED ? (
+      <section>
+        <h2>Set it up, step by step</h2>
+        <p>
+          Eight steps. Each one is a single action. Follow them in order and
+          you go from this page to a sealed file and a printed page with no gap
+          in between.
+        </p>
 
-    <section id="download">
-      <h2>Download and unpack</h2>
-      {DOWNLOAD_ENABLED ? (
-        <>
-          <p>
-            The download is one compressed file, like a zip, containing the
-            folder of scripts and examples. No GitHub account is needed, and
-            nothing about the download is tracked by us.
-          </p>
-          <p>
-            <a class="btn btn-primary" href={RELEASE.tarballUrl}>Download Executor File {RELEASE_TAG}</a>
-          </p>
-          <ol>
-            <li>
-              Click the button. The file{' '}
-              <code>{RELEASE.asset}</code> lands in your Downloads folder.
-            </li>
-            <li>
-              <strong>Mac:</strong> open Downloads in Finder and double-click
-              the file. It unpacks itself into a folder called{' '}
-              <code>executor-file-{RELEASE_TAG}</code>. That folder is the tool;
-              there is nothing to install.
-            </li>
-            <li>
-              Open the <strong>Terminal</strong> app (press{' '}
-              <kbd>Cmd</kbd>+<kbd>Space</kbd>, type "Terminal", press return),
-              then copy and paste this line and press return:
+        <ol class="steps">
+          <li>
+            <h3 class="step-title">Download the tool</h3>
+            <p>
+              The download is one compressed file, like a zip, holding a folder
+              of small scripts and examples. No GitHub account is needed, and
+              nothing about the download is tracked by us.
+            </p>
+            <p>
+              <a class="btn btn-primary" href={RELEASE.tarballUrl}>Download Executor File {RELEASE_TAG}</a>
+            </p>
+            <p>
+              On a Mac: open your Downloads folder in Finder and double-click
+              the file <code>{RELEASE.asset}</code>. It unpacks itself into a
+              folder called <code>executor-file-{RELEASE_TAG}</code>. That
+              folder is the tool. There is nothing to install for it, and you
+              can move it wherever you keep your files.
+            </p>
+            <details>
+              <summary>On Linux instead</summary>
+              <p>
+                Unpack and enter the folder in the Terminal with{' '}
+                <code>tar -xzf {RELEASE.asset}</code> then{' '}
+                <code>cd executor-file-{RELEASE_TAG}</code>. The rest of the
+                steps below are the same.
+              </p>
+            </details>
+            <details>
+              <summary>Optional: check the download arrived intact</summary>
+              <p>
+                In the Terminal (see the next step for how to open it), paste{' '}
+                <code>shasum -a 256 ~/Downloads/{RELEASE.asset}</code> and press
+                return. The long code it prints should match this one, read from
+                the <a href={RELEASE_URL}>release page</a> when this page was
+                built:
+              </p>
+              <pre tabindex="0"><code>{RELEASE.sha256}</code></pre>
+              <p>
+                If it matches, the file arrived exactly as published. If it does
+                not, delete the file and download it again.
+              </p>
+            </details>
+          </li>
+
+          <li>
+            <h3 class="step-title">Open the Terminal and point it at the folder</h3>
+            <p>
+              The Terminal is a plain app that comes with your Mac. It lets you
+              give a program one typed instruction at a time. You do not need to
+              understand it: you copy a line, paste it in, and press return.
+            </p>
+            <p>
+              Open it by pressing <kbd>Cmd</kbd>+<kbd>Space</kbd>, typing
+              "Terminal", and pressing return. Then copy the line below, paste
+              it into the Terminal window, and press return. It points the
+              Terminal at the folder you just unpacked, so the later commands
+              can find the scripts.
+            </p>
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
               <pre tabindex="0"><code>cd ~/Downloads/executor-file-{RELEASE_TAG}</code></pre>
-              That points the Terminal at the folder you just unpacked. Every
-              command in "The steps" below is run from here.
-            </li>
-          </ol>
-          <p>
-            On Ubuntu or Debian Linux, unpack and enter the folder with{' '}
-            <code>tar -xzf {RELEASE.asset}</code> then{' '}
-            <code>cd executor-file-{RELEASE_TAG}</code>.
-          </p>
-          <details>
-            <summary>Optional: check the download is intact</summary>
+            </figure>
             <p>
-              In the Terminal, paste{' '}
-              <code>shasum -a 256 ~/Downloads/{RELEASE.asset}</code> and press
-              return. The long code it prints should match this one, read from
-              the <a href={RELEASE_URL}>release assets</a> when this page was
-              built:
+              Every command from here on is typed into this same Terminal
+              window. If nothing seems to happen after a command, that is normal:
+              most of them do their work quietly and hand you back a fresh line.
             </p>
-            <pre tabindex="0"><code>{RELEASE.sha256}</code></pre>
+          </li>
+
+          <li>
+            <h3 class="step-title">Install the two tools it uses</h3>
             <p>
-              If it matches, the file arrived exactly as published. If it does
-              not, delete the file and download it again.
+              Two small, standard tools do the actual work: <code>age</code>{' '}
+              encrypts your file, and <code>ssss</code> splits the key into
+              shares. Both are free and open source. You install them once, with
+              a single command.
             </p>
-          </details>
-        </>
-      ) : (
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+              <pre tabindex="0"><code>brew install age ssss</code></pre>
+            </figure>
+            <p>
+              If the Terminal says <code>brew</code> is not found, install
+              Homebrew first (one copy-paste command from{' '}
+              <a href="https://brew.sh">brew.sh</a>), then run the line above
+              again.
+            </p>
+            <details>
+              <summary>On Linux instead</summary>
+              <p>
+                On Ubuntu or Debian, install the two tools with{' '}
+                <code>sudo apt install age ssss</code>.
+              </p>
+            </details>
+            <details>
+              <summary>On Windows instead</summary>
+              <p>
+                The owner side is built for Mac and Linux. On Windows, turn on
+                Microsoft's built-in Linux feature: run <code>wsl --install</code>{' '}
+                in an administrator PowerShell, then follow the Linux notes above
+                inside Ubuntu. Your executor never needs any of this: recovery on
+                Windows has <a href="/recover/windows">its own printed sheet</a>.
+              </p>
+            </details>
+          </li>
+
+          <li>
+            <h3 class="step-title">Check your computer is ready</h3>
+            <p>
+              A quick pre-flight check. It confirms the two tools are present
+              and warns about hazards such as folders that sync to the cloud. It
+              changes nothing: it only looks.
+            </p>
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+              <pre tabindex="0"><code>scripts/doctor.sh</code></pre>
+            </figure>
+          </li>
+
+          <li>
+            <h3 class="step-title">Fill in your register, as a form</h3>
+            <p>
+              This is the heart of it, and it needs no code. The tool includes a
+              form that opens in your web browser: dropdowns, plain-English
+              help, no file to hand-edit. On a Mac, open your{' '}
+              <code>executor-file-{RELEASE_TAG}</code> folder in Finder and
+              double-click <code>Edit-Executor-File.command</code>.
+            </p>
+            <p>
+              The form runs entirely on your own computer. Nothing you type into
+              it is sent anywhere: no internet, no account, no server. It records
+              where things are and what you want done, never passwords. When you
+              are finished, click Save and it writes a file called{' '}
+              <code>estate.yaml</code> to your Downloads folder.
+            </p>
+            <details>
+              <summary>The form did not open, or you are not on a Mac</summary>
+              <p>
+                Open the same form from the Terminal instead. It works on Mac
+                and Linux and does the same thing.
+              </p>
+              <figure class="cmd">
+                <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+                <pre tabindex="0"><code>scripts/edit.sh</code></pre>
+              </figure>
+            </details>
+            <details>
+              <summary>Prefer to write the file by hand</summary>
+              <p>
+                You can skip the form and edit the register as a text file
+                instead. Copy the worked example, then open it in a plain editor:
+              </p>
+              <figure class="cmd">
+                <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste each line and press return</figcaption>
+                <pre tabindex="0"><code>cp examples/estate.example.yaml estate.yaml
+nano estate.yaml</code></pre>
+              </figure>
+              <p>
+                The <a href="/sample">sample Executor File</a> shows what a
+                filled-in register looks like.
+              </p>
+            </details>
+          </li>
+
+          <li>
+            <h3 class="step-title">Seal it</h3>
+            <p>
+              One command does the whole sealing. It checks your register, then
+              encrypts it, splits the key into three shares so any two can open
+              it, and proves the chain works by rebuilding the key from two
+              shares and decrypting a test copy before it reports success. The
+              line below reads the file the form saved to your Downloads folder.
+            </p>
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+              <pre tabindex="0"><code>scripts/setup.sh ~/Downloads/estate.yaml</code></pre>
+            </figure>
+            <p>
+              It then walks you through the physical part: copying the three
+              shares as they are shown, and saving your passphrase in your
+              password manager. If you wrote the register by hand into the tool
+              folder, run <code>scripts/setup.sh</code> on its own instead.
+            </p>
+          </li>
+
+          <li>
+            <h3 class="step-title">Print the Executor Instructions</h3>
+            <p>
+              This fills in the two-page printed guide from your register: the
+              page your executor actually follows, in plain language, naming the
+              two standard tools rather than any script of ours.
+            </p>
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+              <pre tabindex="0"><code>scripts/make-guide.sh</code></pre>
+            </figure>
+          </li>
+
+          <li>
+            <h3 class="step-title">Prove the paper works</h3>
+            <p>
+              The fire drill. With two of the printed shares in hand, this walks
+              the exact path your executor will take one day and confirms the
+              file opens from the paper alone. Do it now, while you can fix
+              anything that is wrong.
+            </p>
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+              <pre tabindex="0"><code>scripts/test-recovery.sh</code></pre>
+            </figure>
+          </li>
+        </ol>
+
+        <p class="afterword">
+          Once a year, or whenever something changes, one command reopens the
+          register in the same form, re-seals it with the same passphrase (so
+          your holders' shares stay valid), and sets a calendar reminder for
+          next time: <code>scripts/review.sh</code>. The exact commands, in the
+          tool's own words, are in the <a href={readmeUrl}>project README</a> at
+          the version this page is built from.
+        </p>
+      </section>
+    ) : (
+      <section>
+        <h2>Set it up</h2>
         <p class="panel">
           The download link goes live with the {RELEASE_TAG} release, together
           with its SHA-256 checksum. Until then the current code is readable in
           full <a href={REPO_URL}>on GitHub</a>.
         </p>
-      )}
-      <p>
-        Your executor never needs this download, or this website. The printed
-        instructions use the two standard tools directly.
-      </p>
-    </section>
-
-    <section>
-      <h2>The steps</h2>
-      <p>
-        These are the project's own quickstart steps, pulled from the README at
-        build time so they can never drift from the code. Run each one in the
-        Terminal, from inside the folder you entered above, and read what it
-        says before moving on.
-      </p>
-      <Mirrored file="README.md" label="Quickstart, from the project README">
-        <Quickstart.Content />
-      </Mirrored>
-    </section>
+      </section>
+    )}
 
     <section>
       <h2>Then the physical part</h2>
       <p>
         Put one printed share with each of three holders and tell them what it
-        is. Store the encrypted file in at least two private places. Print the
-        Executor Instructions and store them with the will. The paper matters
-        more than the software; the software exists to make the paper true.
+        is. Store the encrypted file in at least two private places. Keep the
+        printed Executor Instructions with your will. The paper matters more
+        than the software. The software exists to make the paper true.
+      </p>
+      <p>
+        Your executor never needs this download, or this website. The printed
+        instructions use the two standard tools directly.
       </p>
       <p>
         Questions along the way? The <a href="/faq">FAQ</a> covers the common
@@ -137,3 +287,92 @@ import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL } from '.
     </section>
   </div>
 </Base>
+
+<style>
+  /* Numbered setup path: a real ordered list, styled so each step reads as a
+     distinct, self-contained action rather than a run of bold prose. */
+  .steps {
+    list-style: none;
+    padding-left: 0;
+    counter-reset: step;
+  }
+  .steps > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 3.25rem;
+    margin-bottom: var(--space-6);
+  }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 650;
+    font-size: var(--text-lg);
+    color: var(--paper);
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .step-title {
+    margin-top: 0.15rem;
+    margin-bottom: var(--space-2);
+  }
+
+  /* Command block: unmistakably a command, with an explicit "type this in the
+     Terminal" caption above it so it can never read as ordinary prose. */
+  .cmd {
+    margin: var(--space-3) 0;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--code-bg);
+  }
+  .cmd figcaption {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: var(--accent-wash);
+    color: var(--accent-strong);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid var(--rule);
+  }
+  .cmd-glyph {
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  .cmd pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    font-size: var(--text-base);
+  }
+
+  details {
+    margin: var(--space-3) 0;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--accent);
+  }
+  details summary:hover {
+    color: var(--accent-strong);
+  }
+  details > *:not(summary) {
+    margin-top: var(--space-2);
+  }
+
+  .afterword {
+    margin-top: var(--space-5);
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+  }
+</style>
