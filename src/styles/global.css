@@ -126,6 +126,13 @@ img { max-width: 100%; height: auto; }
   padding-block: var(--space-6);
 }
 
+/* On prose pages the lead section is followed directly by an h2 that carries
+   its own top margin; drop the section's bottom padding so the two do not
+   stack into a double gap. */
+.prose .section {
+  padding-block: var(--space-5) 0;
+}
+
 /* Buttons */
 .btn {
   display: inline-block;

@@ -10,7 +10,7 @@
     "pin:refresh": "node scripts/fetch-mirror.mjs --refresh-hashes",
     "og": "node scripts/make-og.mjs",
     "dev": "npm run fetch && npm run og && astro dev",
-    "build": "npm run fetch && npm run og && astro build",
+    "build": "npm run fetch && npm run og && astro build && node scripts/external-links.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:voice": "node scripts/check-voice.mjs",
     "check:recover": "node scripts/check-recover.mjs",
