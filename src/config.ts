@@ -12,10 +12,10 @@ export const STATS = stats;
 export const REPO_URL = `https://github.com/${pin.repo}`;
 export const REPO_TREE_URL = `${REPO_URL}/tree/${pin.ref}`;
 
-// Flip to true when the v0.3.0 release exists and pin.json is re-pinned to
-// the tag. Until then the download section shows a plain waiting state.
-// Listed in NOTES.md as a launch step.
-export const DOWNLOAD_ENABLED = false;
-export const RELEASE_TAG = 'v0.3.0';
+// True while pin.json is pinned to a tagged release: the download section
+// shows the release tarball with its SHA-256, both pulled from the release
+// assets at build time (see fetch-mirror.mjs).
+export const DOWNLOAD_ENABLED = stats.release !== null;
+export const RELEASE = stats.release;
+export const RELEASE_TAG = stats.release?.tag ?? 'v0.3.0';
 export const RELEASE_URL = `${REPO_URL}/releases/tag/${RELEASE_TAG}`;
-export const RELEASE_TARBALL_URL = `${REPO_URL}/archive/refs/tags/${RELEASE_TAG}.tar.gz`;

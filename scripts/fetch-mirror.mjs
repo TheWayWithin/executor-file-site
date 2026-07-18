@@ -126,7 +126,29 @@ const ciOses = osMatch ? osMatch[1].split(',').map((s) => s.trim().replace(/-lat
 const recoveryDoc = fs.readFileSync(path.join(treeDir, 'templates/EXECUTOR-INSTRUCTIONS.md'), 'utf8');
 const recoveryCommands = (recoveryDoc.match(/^```$/gm) || []).length / 2;
 
+// Release download facts, pulled from the published release assets when the
+// pin is a tag. The checksum is read from the .sha256 sidecar asset, never
+// typed by hand; a missing sidecar fails the build because the download
+// button depends on it.
+let release = null;
+if (pin.tag) {
+  const asset = `executor-file-${pin.tag}.tar.gz`;
+  const base = `https://github.com/${pin.repo}/releases/download/${pin.tag}`;
+  const sidecar = await fetch(`${base}/${asset}.sha256`, { redirect: 'follow' });
+  if (!sidecar.ok) {
+    console.error(`FAIL: release checksum sidecar missing: ${base}/${asset}.sha256 (HTTP ${sidecar.status})`);
+    process.exit(1);
+  }
+  const sum = (await sidecar.text()).trim().split(/\s+/)[0];
+  if (!/^[0-9a-f]{64}$/.test(sum)) {
+    console.error(`FAIL: release sidecar did not contain a SHA-256: "${sum.slice(0, 80)}"`);
+    process.exit(1);
+  }
+  release = { tag: pin.tag, asset, tarballUrl: `${base}/${asset}`, sha256: sum };
+}
+
 const stats = {
+  release,
   repo: pin.repo,
   ref: pin.ref,
   tag: pin.tag,

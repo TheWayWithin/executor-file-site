@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Mirrored from '../components/Mirrored.astro';
 import * as Quickstart from '../mirrored/quickstart.md';
-import { DOWNLOAD_ENABLED, RELEASE_TAG, RELEASE_URL, RELEASE_TARBALL_URL, REPO_URL } from '../config';
+import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL } from '../config';
 ---
 <Base
   title="Get started"
@@ -52,12 +52,16 @@ import { DOWNLOAD_ENABLED, RELEASE_TAG, RELEASE_URL, RELEASE_TARBALL_URL, REPO_U
             needed, and nothing about the download is tracked by us.
           </p>
           <p>
-            <a class="btn btn-primary" href={RELEASE_TARBALL_URL}>Download Executor File {RELEASE_TAG}</a>
+            <a class="btn btn-primary" href={RELEASE.tarballUrl}>Download Executor File {RELEASE_TAG}</a>
           </p>
           <p>
-            The SHA-256 checksum is published beside the release on the{' '}
-            <a href={RELEASE_URL}>release page</a>. Verify it with{' '}
-            <code>shasum -a 256</code> on the downloaded file.
+            SHA-256, read from the{' '}
+            <a href={RELEASE_URL}>release assets</a> at build time:
+          </p>
+          <pre tabindex="0"><code>{RELEASE.sha256}  {RELEASE.asset}</code></pre>
+          <p>
+            To verify: run <code>shasum -a 256</code> on the downloaded file and
+            compare the result with the line above.
           </p>
         </>
       ) : (

@@ -1,8 +1,8 @@
 {
   "repo": "TheWayWithin/executor-file",
-  "ref": "bfe5b500ebde97e097f4de81fdde9cc4112c9064",
-  "tag": null,
-  "note": "Pinned to main because v0.3.0 is not yet tagged. Launch requires re-pinning to the v0.3.0 tag: set ref to the tag's commit SHA, set tag to 'v0.3.0', refresh the file hashes below (npm run pin:refresh), and review the diff.",
+  "ref": "c8e0ded44993490ada5bb0d2e409403c0d47cf94",
+  "tag": "v0.3.0",
+  "note": "Pinned to the v0.3.0 tag commit. To bump: update ref (and tag), run npm run pin:refresh, review the diff.",
   "files": {
     "templates/EXECUTOR-INSTRUCTIONS.md": "4ed3146afb8b0b5fb01f000b4487766160371c70c24c01b05a393bc6563acedc",
     "docs/WINDOWS-RECOVERY.md": "6dd51a01301219a026cbb1625578f54ed144408c750673f71f4d9b96db284913",

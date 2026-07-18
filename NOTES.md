@@ -4,22 +4,21 @@ State as of 18 July 2026: the site is LIVE at https://executorfile.com
 (Jamie's call: going live pre-tag is fine because untagged state is handled
 and there is no traffic). Netlify DNS serves both domains, HTTPS is issued,
 and executor-file.com (and both www hosts) 301 to executorfile.com; verified
-18 July 2026. The v0.3.0 tag does not exist yet in the tool repo, so the
-items below that depend on it remain parked.
+18 July 2026. Later that day v0.3.0 was tagged and released, the site was
+re-pinned to it, and the download button went live.
 
 ## Launch checklist (in order)
 
-1. **Tag v0.3.0 in TheWayWithin/executor-file** (the existing release gates
-   in that repo). Everything below waits on this.
-2. **Re-pin the site to the tag.** The mirror is currently pinned to main
-   commit `bfe5b500ebde97e097f4de81fdde9cc4112c9064` because the tag did not
-   exist at build time. To re-pin: in `pin.json` set `ref` to the tag's commit
-   SHA and `tag` to `"v0.3.0"`, run `npm run pin:refresh`, review the diff,
-   commit. CI fails on any file that stopped byte-matching, which is the
-   drift protection working.
-3. **Flip the download flag.** In `src/config.ts` set `DOWNLOAD_ENABLED = true`.
-   The Get started page then shows the tarball button with the SHA-256 note
-   instead of the "available with v0.3.0" state.
+1. ~~Tag v0.3.0~~ **Done 18 July 2026** (release "v0.3.0 — the Executor
+   Release" published with tarball + .sha256 assets).
+2. ~~Re-pin the site to the tag~~ **Done 18 July 2026**: pinned to tag commit
+   `c8e0ded4`; all five mirrored files byte-identical to the previous pin.
+   Future bumps: update `ref`/`tag` in `pin.json`, `npm run pin:refresh`,
+   review the diff.
+3. ~~Flip the download flag~~ **Done 18 July 2026**: the download now enables
+   itself whenever the pin is a tagged release; the button links the release
+   tarball asset and shows its SHA-256, both read from the release assets at
+   build time (tarball hash verified against the sidecar independently).
 4. **Register executorfile.com in Plausible.** Jamie has deliberately not yet
    added the site to his Plausible account. The snippet already ships in the
    base layout (excluded from /recover at the layout level), so until
