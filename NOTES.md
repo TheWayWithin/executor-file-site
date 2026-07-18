@@ -1,8 +1,11 @@
 # NOTES: launch checklist and open items
 
-State as of 17 July 2026: the site is built and deployed to its netlify.app
-subdomain. The v0.3.0 tag does not exist yet in the tool repo, so everything
-below that depends on it is deliberately parked.
+State as of 18 July 2026: the site is LIVE at https://executorfile.com
+(Jamie's call: going live pre-tag is fine because untagged state is handled
+and there is no traffic). Netlify DNS serves both domains, HTTPS is issued,
+and executor-file.com (and both www hosts) 301 to executorfile.com; verified
+18 July 2026. The v0.3.0 tag does not exist yet in the tool repo, so the
+items below that depend on it remain parked.
 
 ## Launch checklist (in order)
 
@@ -22,22 +25,12 @@ below that depends on it is deliberately parked.
    base layout (excluded from /recover at the layout level), so until
    registration happens the dashboard simply has no data. Missing analytics
    data before this step is expected, not an error.
-5. **DNS handoff (Jamie's only registrar action).** Per the strategy doc, DNS
-   waits for the v0.3.0 tag. When ready:
-   - Add both domains to the Netlify site (executorfile.com primary,
-     executor-file.com as an alias) and set up Netlify DNS for both.
-   - Netlify will show four nameservers (of the form `dns1.p0X.nsone.net`).
-   - At Namecheap, for **each** of executorfile.com and executor-file.com:
-     Domain List > Manage > Nameservers > Custom DNS > paste the four Netlify
-     nameservers.
-   - Then poll (do not fail): propagation can take an hour or two. Confirm
-     HTTPS certificates issue on both domains and that
-     `https://executor-file.com` 301s to `https://executorfile.com`
-     (the redirect rules are already in `netlify.toml`).
-6. **Set the SITE_URL repository variable** on GitHub
-   (`gh variable set SITE_URL --body "https://executorfile.com"` after DNS,
-   or the netlify.app URL before it) so the CI live-check job for /recover
-   runs on every push.
+5. ~~DNS handoff~~ **Done 18 July 2026.** Both domains on Netlify DNS
+   (executorfile.com primary; executor-file.com and both www hosts 301 to
+   it), Let's Encrypt certificate issued, verified. Task T-170 closed.
+6. ~~Set the SITE_URL repository variable~~ **Done**: set to
+   `https://executorfile.com`; the CI live-check job for /recover runs on
+   every push.
 7. **Jamie writes /story.** The page ships as a layout-only placeholder; the
    copy is his, in his voice (jamie-voice skill), not SEO-optimised.
 8. **Review and publish the three Learn drafts.** They live in
