@@ -26,6 +26,11 @@ if (!fs.existsSync(distLlms)) {
   process.exit(1);
 }
 
+// llms-full.txt (the same pages with full text inlined) must also be served.
+if (!fs.existsSync(path.join(dist, 'llms-full.txt'))) {
+  fail('llms-full.txt is not present in dist/ (not served)');
+}
+
 const txt = fs.readFileSync(distLlms, 'utf8');
 const links = [...txt.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map((m) => m[1]);
 
