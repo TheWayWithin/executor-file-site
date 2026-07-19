@@ -4,6 +4,18 @@ import { REPO_URL } from '../config';
 
 const faqs = [
   {
+    q: 'What happens to my online accounts when I die?',
+    a: `It depends entirely on whether anyone can find them. Banks, email, subscriptions and social accounts do not close themselves; each provider has its own bereavement process, and most need proof of death and proof that you are the executor. The hard part is knowing the accounts exist at all. Executor File is the list your executor works from: every account, where the login lives, and what you wanted done with each one. Without a list like that, an executor is left guessing, and accounts quietly renew, lapse or sit open for years.`,
+  },
+  {
+    q: 'How will my family find my passwords?',
+    a: `They should not need your passwords, and this tool never stores them. Your logins stay in your password manager, where they belong; Executor File records where that password manager is and how to reach it, alongside every account it protects. Handing over a list of live passwords is unsafe and usually breaks the provider's terms. What your family actually needs is the map: which accounts exist, where the keys are kept, and the authority to act. That is what the register holds.`,
+  },
+  {
+    q: 'How does this fit into digital estate planning?',
+    a: `Digital estate planning is the work of making sure someone can settle your affairs after you die: the accounts, the assets, the liabilities and the wishes attached to each. A will names who acts; it rarely records what exists or where to look. Executor File is the missing inventory. It is the practical part of your digital legacy, and one you keep yourself: a single encrypted file your family holds, not a subscription that has to outlive you.`,
+  },
+  {
     q: 'What if I lose the passphrase?',
     a: `While you are alive, nothing is lost: the passphrase lives in your password manager, and if it ever went missing from there, any two of the three printed shares reconstruct it. If the passphrase and two shares are all gone, the file stays sealed forever. There is no reset and no back door; that is the security property working, not failing.`,
   },
@@ -44,10 +56,23 @@ const faqs = [
     a: `No. The register records practical guidance: where things are and what you wanted done. The will decides, along with beneficiary designations, ownership rights, provider terms and the law. Take estate-document wording to whoever drafts the will.`,
   },
 ];
+
+// FAQPage schema, built from the same array the page renders. Parity with the
+// visible questions and answers is guaranteed because there is one source.
+const faqPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 <Base
-  title="FAQ"
-  description="Common questions about Executor File: lost passphrases, dead share holders, why there is no app, Windows, and what your solicitor needs to know."
+  title="Executor File FAQ: passphrases, share holders, Windows and your solicitor"
+  description="Common questions about Executor File: what happens to your accounts when you die, how families find passwords, lost passphrases, dead share holders, why there is no app, Windows, and what your solicitor needs to know."
+  jsonLd={faqPageLd}
 >
   <div class="wrap prose">
     <section class="section">

@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
+import { SITE_URL } from '../../config';
 
 export async function getStaticPaths() {
   const articles = await getCollection('learn', ({ data }) => !data.draft);
@@ -9,8 +10,24 @@ export async function getStaticPaths() {
 
 const { article } = Astro.props;
 const { Content } = await render(article);
+
+const published = article.data.pubDate.toISOString().slice(0, 10);
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: article.data.title,
+  description: article.data.description,
+  datePublished: published,
+  dateModified: published,
+  author: {
+    '@type': 'Person',
+    name: 'Jamie Watters',
+    url: 'https://jamiewatters.work',
+  },
+  mainEntityOfPage: `${SITE_URL}/learn/${article.id}`,
+};
 ---
-<Base title={article.data.title} description={article.data.description}>
+<Base title={article.data.title} description={article.data.description} jsonLd={articleLd}>
   <div class="wrap prose">
     <article class="section">
       <h1>{article.data.title}</h1>

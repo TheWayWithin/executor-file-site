@@ -1,10 +1,49 @@
 ---
 import Recover from '../../layouts/Recover.astro';
 import * as Instructions from '../../mirrored/executor-instructions.md';
+import instructionsRaw from '../../mirrored/executor-instructions.md?raw';
+
+// The two load-bearing recovery commands are lifted from the pinned source at
+// build time, never retyped, so the HowTo can never drift from the printed
+// page. Same extraction the recover guard (check-recover.mjs) uses.
+const commandBlocks = [...instructionsRaw.matchAll(/^```\n([\s\S]*?)^```/gm)].map(
+  (m) => m[1].trim()
+);
+const [combineCmd, decryptCmd] = commandBlocks;
+
+const howToLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: 'Open an Executor File',
+  description:
+    'How an executor opens an Executor File on a Mac or Linux computer, using two standard open-source tools and any two of the three printed key shares.',
+  tool: [
+    { '@type': 'HowToTool', name: 'age' },
+    { '@type': 'HowToTool', name: 'ssss' },
+  ],
+  step: [
+    {
+      '@type': 'HowToStep',
+      name: 'Install the two tools',
+      text: 'Install age and ssss, the two standard open-source tools recovery uses. On a Mac: brew install age ssss. On Ubuntu or Debian Linux: sudo apt install age ssss.',
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Rebuild the passphrase from two shares',
+      text: `Run ${combineCmd} and enter any two of the three printed shares, exactly as printed. The line beginning "Resulting secret" is the passphrase.`,
+    },
+    {
+      '@type': 'HowToStep',
+      name: 'Decrypt the register',
+      text: `Put estate.yaml.age in your home folder, run ${decryptCmd}, and enter the passphrase from the previous step. A readable estate.yaml file appears, listing every account with what to do about it.`,
+    },
+  ],
+};
 ---
 <Recover
   title="For executors: opening the Executor File"
   description="How to open an Executor File: the same instructions as the printed page, with the three commands. No account, no software of ours, nothing to buy."
+  jsonLd={howToLd}
 >
   <p class="variant-note no-print">
     This page is the printed Executor Instructions, word for word. If the only

@@ -8,10 +8,11 @@ import Base from './Base.astro';
 interface Props {
   title: string;
   description: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
-const { title, description } = Astro.props;
+const { title, description, jsonLd } = Astro.props;
 ---
-<Base title={title} description={description} quiet>
+<Base title={title} description={description} quiet jsonLd={jsonLd}>
   <div class="recover wrap">
     <header class="recover-top" role="banner">
       <a href="/">Executor File</a>

@@ -1,11 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import { DOWNLOAD_ENABLED, RELEASE, RELEASE_TAG, RELEASE_URL, REPO_URL, PIN } from '../config';
+import { softwareApplicationLd } from '../schema';
 const readmeUrl = `${REPO_URL}/blob/${PIN.ref}/README.md`;
 ---
 <Base
-  title="Get started"
+  title="Get started: set up your Executor File in about an hour"
   description="Set up your Executor File: about an hour at the computer, one step at a time. Fill in the register as a form, with no code to write. The result is an encrypted file and a printed page your executor can follow forever."
+  jsonLd={softwareApplicationLd}
 >
   <div class="wrap prose">
     <section class="section">

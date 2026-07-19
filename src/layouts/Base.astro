@@ -13,17 +13,33 @@ interface Props {
    * Plausible snippet is simply never rendered when it is true.
    */
   quiet?: boolean;
+  /**
+   * Structured data (schema.org / JSON-LD). One object or an array of them;
+   * each is emitted as its own <script type="application/ld+json">. Pages
+   * build these from the same data they render, so the markup cannot drift
+   * from what a human sees (e.g. FAQ schema shares the FAQ page's array).
+   */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title, description, quiet = false } = Astro.props;
+const { title, description, quiet = false, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImage = new URL('/og/default.png', SITE_URL).href;
+
+// Title: a page whose title already carries the brand stands alone; every
+// other page gets " · Executor File" appended. Middle dot, never an em-dash.
+const pageTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`;
+
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+// Escape "<" so a value can never break out of the script element.
+const serialise = (item: Record<string, unknown>) =>
+  JSON.stringify(item).replace(/</g, '\\u003c');
 ---
 <html lang="en-GB">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title === SITE_NAME ? title : `${title} · ${SITE_NAME}`}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -39,6 +55,9 @@ const ogImage = new URL('/og/default.png', SITE_URL).href;
     {!quiet && (
       <script defer data-domain={PLAUSIBLE_DOMAIN} src="https://plausible.io/js/script.js"></script>
     )}
+    {jsonLdItems.map((item) => (
+      <script type="application/ld+json" set:html={serialise(item)} />
+    ))}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>

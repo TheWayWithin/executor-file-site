@@ -2,10 +2,12 @@
 import Base from '../layouts/Base.astro';
 import * as OutOfScope from '../mirrored/out-of-scope.md';
 import { REPO_URL, PIN } from '../config';
+import { HOMEPAGE_DESCRIPTION, softwareApplicationLd } from '../schema';
 ---
 <Base
-  title="Executor File"
-  description="Everything your executor will need, in one encrypted file. A free, open-source register of every account, asset and liability you own, and one printed page that tells your executor how to open it."
+  title="Executor File: everything your executor will need, in one encrypted file"
+  description={HOMEPAGE_DESCRIPTION}
+  jsonLd={softwareApplicationLd}
 >
   <div class="wrap">
     <section class="hero">
