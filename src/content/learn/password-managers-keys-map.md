@@ -2,16 +2,10 @@
 title: "Password managers hold the keys. Your executor needs the map."
 description: "What 1Password, Bitwarden, Apple and Google actually hand over after a death, what they do not, and why a password manager alone is not an estate plan."
 pubDate: 2026-07-17
-draft: true
-affiliate: true
+draft: false
+affiliate: false
 markets: [US, UK, CA, AU, NZ]
 ---
-
-<!-- DRAFT NOTE for Jamie: links below are plain vendor links. Swap for
-     affiliate URLs (1Password via Impact; others as signed up) before
-     publishing, and verify each product claim against the vendor's current
-     documentation. The disclosure line renders automatically from the
-     affiliate flag in the frontmatter. -->
 
 A password manager is the single best thing you can set up for your executor, and it is not enough on its own. It holds the keys: every login, in one place, behind one strong secret. What it does not hold is the map: what exists, what matters, what to do about each thing, and in what order. This article covers what the major emergency-access schemes actually hand over, and where each one stops.
 
