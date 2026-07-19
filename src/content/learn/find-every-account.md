@@ -2,7 +2,7 @@
 title: "How to find every account someone owned: a working checklist"
 description: "A practical, category-by-category checklist for executors and families trying to reconstruct someone's financial and digital life, with per-country notes."
 pubDate: 2026-07-17
-draft: true
+draft: false
 affiliate: false
 markets: [US, UK, CA, AU, NZ]
 ---

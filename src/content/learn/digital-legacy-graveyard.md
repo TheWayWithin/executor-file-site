@@ -2,14 +2,10 @@
 title: "The digital legacy graveyard: five services that promised forever"
 description: "Lantern, Deathswitch, Legacy Locker, Beyond, Farewill: what happens to end-of-life services over time, and what that means for where you keep your plans."
 pubDate: 2026-07-17
-draft: true
+draft: false
 affiliate: false
 markets: [US, UK]
 ---
-
-<!-- DRAFT NOTE for Jamie: verify each factual line and link against the
-     source before publishing; the evergreen sourced table lives on
-     /built-to-last and should stay the stricter of the two. -->
 
 End-of-life planning services make an unusual promise: that they will still be there, working, on a day that might be thirty years away, for a grieving stranger who has never used them. It is worth looking at how that promise has held up.
 
