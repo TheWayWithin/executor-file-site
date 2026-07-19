@@ -14,7 +14,9 @@
     "check:links": "node scripts/check-links.mjs",
     "check:voice": "node scripts/check-voice.mjs",
     "check:recover": "node scripts/check-recover.mjs",
-    "verify": "npm run build && npm run check:links && npm run check:voice && npm run check:recover"
+    "check:jsonld": "node scripts/check-jsonld.mjs",
+    "check:llms": "node scripts/check-llms.mjs",
+    "verify": "npm run build && npm run check:links && npm run check:voice && npm run check:recover && npm run check:jsonld && npm run check:llms"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.19",

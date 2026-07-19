@@ -1,0 +1,17 @@
+# Executor File
+
+> Everything your executor will need, in one encrypted file. A free, open-source register of every account, asset and liability you own, and one printed page that tells your executor how to open it. No account, no server, no subscription, no credentials stored, and no company that can shut down. Recovery uses two standard tools (age and ssss), so the file still opens even if the project disappears. Owner setup runs on macOS or Linux; executor recovery also works on Windows via WSL.
+
+## Pages
+
+- [How it works](https://executorfile.com/how-it-works): The design in plain English. A text register sealed with age encryption, its key split 2-of-3 across three printed shares, plus the threat model and platform legacy tools.
+- [Get started](https://executorfile.com/get-started): The owner setup path, about an hour, one step at a time. Fill in the register as a form, seal it, print the instructions, and prove the paper works.
+- [Why trust this](https://executorfile.com/why-trust-this): The verifiable case. Script line counts and repository facts computed from the pinned commit at build time, and what no maintainer can do (there is no back door).
+- [FAQ](https://executorfile.com/faq): Answers to common questions, including what happens to your online accounts when you die, how families find passwords, lost passphrases, dead share holders, Windows, and what a solicitor needs to know.
+- [For executors: opening the Executor File](https://executorfile.com/recover): The recovery instructions, word for word with the printed page. The three commands that open the file on a Mac or Linux computer, with no account and nothing to buy.
+- [Opening the Executor File on Windows](https://executorfile.com/recover/windows): The Windows recovery sheet. The same recovery, using Microsoft's built-in WSL feature, with the extra setup cost stated upfront.
+- [Learn](https://executorfile.com/learn): Practical writing on digital estates: finding every account someone owned, what password managers hand over, and why hosted legacy services keep disappearing.
+
+## Source
+
+- [Source code on GitHub](https://github.com/TheWayWithin/executor-file): The full MIT-licensed tool. Short, readable scripts that wrap age and ssss, the register schema, the printed templates, and the security policy.

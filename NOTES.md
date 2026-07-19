@@ -42,6 +42,10 @@ re-pinned to it, and the download button went live.
    row, and consider committing to printing `executorfile.com/recover` on the
    printed guide's next revision (the CI test that the URL resolves already
    ships).
+10. **Set the GitHub repo homepage field** on TheWayWithin/executor-file to
+    `https://executorfile.com` (repo "About" panel). Makes the site the
+    canonical link agents and humans follow from the repository. GitHub topics
+    are already set; this is the remaining repo-side discoverability field.
 
 ## Standing decisions recorded here
 
