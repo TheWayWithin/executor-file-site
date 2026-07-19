@@ -160,11 +160,14 @@ const readmeUrl = `${REPO_URL}/blob/${PIN.ref}/README.md`;
             <h3 class="step-title">Fill in your register, as a form</h3>
             <p>
               This is the heart of it, and it needs no code. The tool includes a
-              form that opens in your web browser: dropdowns, plain-English
-              help, no file to hand-edit. On a Mac, open your{' '}
-              <code>executor-file-{RELEASE_TAG}</code> folder in Finder and
-              double-click <code>Edit-Executor-File.command</code>.
+              form that opens in your web browser: dropdowns, plain-English help,
+              no file to hand-edit. Run the same one-line command as the steps
+              above, and the form opens.
             </p>
+            <figure class="cmd">
+              <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
+              <pre tabindex="0"><code>scripts/edit.sh</code></pre>
+            </figure>
             <p>
               The form runs entirely on your own computer. Nothing you type into
               it is sent anywhere: no internet, no account, no server. It records
@@ -173,15 +176,14 @@ const readmeUrl = `${REPO_URL}/blob/${PIN.ref}/README.md`;
               <code>estate.yaml</code> to your Downloads folder.
             </p>
             <details>
-              <summary>The form did not open, or you are not on a Mac</summary>
+              <summary>Prefer to open it without the Terminal (Mac)</summary>
               <p>
-                Open the same form from the Terminal instead. It works on Mac
-                and Linux and does the same thing.
+                Open your <code>executor-file-{RELEASE_TAG}</code> folder in
+                Finder and double-click <code>Edit-Executor-File.command</code>.
+                If nothing happens, that is macOS blocking programs downloaded
+                from the internet: use the <code>scripts/edit.sh</code> command
+                above instead, which always works.
               </p>
-              <figure class="cmd">
-                <figcaption><span class="cmd-glyph" aria-hidden="true">&gt;_</span> In the Terminal, paste this and press return</figcaption>
-                <pre tabindex="0"><code>scripts/edit.sh</code></pre>
-              </figure>
             </details>
             <details>
               <summary>Prefer to write the file by hand</summary>
