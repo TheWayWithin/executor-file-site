@@ -2,7 +2,7 @@
 title: "Your digital estate: the problem nobody warns your family about"
 description: "When someone dies, the people left behind become detectives. What a digital estate is, why it is so hard to settle, the options that actually exist, and how to leave a map instead of a mystery."
 pubDate: 2026-07-19
-draft: true
+draft: false
 affiliate: false
 markets: [US, UK, CA, AU, NZ]
 ---
