@@ -19,11 +19,11 @@ re-pinned to it, and the download button went live.
    itself whenever the pin is a tagged release; the button links the release
    tarball asset and shows its SHA-256, both read from the release assets at
    build time (tarball hash verified against the sidecar independently).
-4. **Register executorfile.com in Plausible.** Jamie has deliberately not yet
-   added the site to his Plausible account. The snippet already ships in the
-   base layout (excluded from /recover at the layout level), so until
-   registration happens the dashboard simply has no data. Missing analytics
-   data before this step is expected, not an error.
+4. ~~Register executorfile.com in Plausible~~ **Done 22 July 2026 (T-169).**
+   Added to Jamie's Plausible account; verification passed against the classic
+   `script.js` already shipping in the base layout (excluded from /recover at
+   the layout level), so no site change was needed. Dashboard is live,
+   America/New_York timezone, awaiting first pageviews.
 5. ~~DNS handoff~~ **Done 18 July 2026.** Both domains on Netlify DNS
    (executorfile.com primary; executor-file.com and both www hosts 301 to
    it), Let's Encrypt certificate issued, verified. Task T-170 closed.
@@ -42,10 +42,10 @@ re-pinned to it, and the download button went live.
    row, and consider committing to printing `executorfile.com/recover` on the
    printed guide's next revision (the CI test that the URL resolves already
    ships).
-10. **Set the GitHub repo homepage field** on TheWayWithin/executor-file to
-    `https://executorfile.com` (repo "About" panel). Makes the site the
-    canonical link agents and humans follow from the repository. GitHub topics
-    are already set; this is the remaining repo-side discoverability field.
+10. ~~Set the GitHub repo homepage field~~ **Done (T-174).** TheWayWithin/executor-file
+    homepage is set to `https://executorfile.com` (repo "About" panel) and
+    topics are set. The site is now the canonical link agents and humans
+    follow from the repository.
 
 ## Standing decisions recorded here
 
