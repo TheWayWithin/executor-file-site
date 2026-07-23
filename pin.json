@@ -1,13 +1,13 @@
 {
   "repo": "TheWayWithin/executor-file",
-  "ref": "4ac7b58c468ad0d7cafcd1051fb1ea57a6d1a55d",
-  "tag": "v0.3.1",
-  "note": "Pinned to the v0.3.1 tag commit. To bump: update ref (and tag), run npm run pin:refresh, review the diff.",
+  "ref": "8b1a19a3ffff5c703408d8e7360c846af125176d",
+  "tag": "v0.3.2",
+  "note": "Pinned to the v0.3.2 tag commit. To bump: update ref (and tag), run npm run pin:refresh, review the diff.",
   "files": {
     "templates/EXECUTOR-INSTRUCTIONS.md": "4ed3146afb8b0b5fb01f000b4487766160371c70c24c01b05a393bc6563acedc",
     "docs/WINDOWS-RECOVERY.md": "6dd51a01301219a026cbb1625578f54ed144408c750673f71f4d9b96db284913",
-    "docs/discovery-checklist.md": "edc53b7b5223e3a44bba8435c1058ac074d2209d69a62074aed891f806578448",
-    "README.md": "d24bc09bfbb3adde2c6b09306700c1424829c352fa2e203716ae745e2a859f70",
-    "SECURITY.md": "59e30b119066a418975cf7cbac4a739df833728aba1b9241fff0d7ff732f3a18"
+    "docs/discovery-checklist.md": "0437a01d35c6e0bfb61c2e48fd6bd8442c87178951836e24b4f5343f2ff7b118",
+    "README.md": "7bf5f02031844fe364ef6de8d8a920aed267fcfa1a1b9b2e5a67c08bcdfabc89",
+    "SECURITY.md": "e462bf710417e614380386d48304fd6c39a7cc64644c77baefb9ed80ab0d722f"
   }
 }
