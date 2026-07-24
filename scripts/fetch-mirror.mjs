@@ -97,7 +97,6 @@ const section = (heading) => {
   const end = rest.indexOf('\n## ', 1);
   return rewriteLinks(end === -1 ? rest : rest.slice(0, end)).trim() + '\n';
 };
-fs.writeFileSync(path.join(outDir, 'quickstart.md'), section('Quickstart (you, the owner)'));
 fs.writeFileSync(path.join(outDir, 'threat-model.md'), section('Threat model'));
 fs.writeFileSync(path.join(outDir, 'out-of-scope.md'), section('Deliberately out of scope'));
 fs.writeFileSync(path.join(outDir, 'how-diagram.md'), section('How it works'));
@@ -161,4 +160,4 @@ const stats = {
   recoveryCommandBlocks: recoveryCommands,
 };
 fs.writeFileSync(path.join(outDir, 'stats.json'), JSON.stringify(stats, null, 2) + '\n');
-console.log(`mirrored ${Object.keys(pin.files).length} pinned files + 3 derived sections + stats.json`);
+console.log(`mirrored ${Object.keys(pin.files).length} pinned files + 4 derived sections + stats.json`);
